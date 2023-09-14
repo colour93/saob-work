@@ -2,14 +2,19 @@
   "name": "saob-work",
   "version": "2023-09-14 16:22:38",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "node --experimental-modules utils/formatData.mjs",
-    "update": "node --experimental-modules utils/updateVersion.mjs"
+    "format": "prettier --write \"app/**/*.tsx\" \"utils/**/*.ts\" && ts-node --esm utils/formatData.ts",
+    "update": "ts-node --esm utils/updateVersion.ts"
   },
+  "pre-commit": [
+    "lint",
+    "format"
+  ],
   "dependencies": {
     "@types/node": "20.6.0",
     "@types/react": "18.2.21",
@@ -26,6 +31,8 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
+    "pre-commit": "^1.2.2",
+    "prettier": "^3.0.3",
     "ts-node": "^10.9.1"
   }
 }

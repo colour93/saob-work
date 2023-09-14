@@ -9,19 +9,28 @@ export async function GET(request: Request) {
   const type = searchParams.get("type") || "json";
 
   const copywritingStr = await readFile(
-    path.resolve("data", "copywriting.txt"),
+    path.resolve("data", "copywriting.json"),
     "utf-8"
   );
+  let data: string[] = [];
 
-  const copywriting =
-    copywritingStr.split("\r\n\r\n").length === 1
-      ? copywritingStr.split("\n\n")
-      : copywritingStr.split("\r\n\r\n");
+  try {
+    data = JSON.parse(copywritingStr);
+  } catch (e) {
+    return type === "plain"
+      ? new NextResponse(`Unexpected error\n${(e ?? new Error()).toString()}`)
+      : NextResponse.json({
+          code: 500,
+          data: (e ?? new Error()).toString(),
+          repo: "https://github.com/colour93/saob-work",
+          version: packageJson.version,
+        });
+  }
 
-  const data = copywriting[Math.floor(Math.random() * copywriting.length)];
+  const res = data[Math.floor(Math.random() * data.length)];
 
   return type === "plain"
-    ? new NextResponse(data)
+    ? new NextResponse(res)
     : NextResponse.json({
         code: 200,
         data,
