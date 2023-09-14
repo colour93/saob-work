@@ -19,6 +19,9 @@ jobs:
       - name: Run npm run update
         run: npm run update
 
+      - name: Create and switch to new branch
+        run: git checkout -b release
+
       - name: Commit and push changes
         run: |
           git config --global user.name "GitHub Actions"
