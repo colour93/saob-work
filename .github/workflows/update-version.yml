@@ -23,9 +23,11 @@ jobs:
         run: git checkout -b release
 
       - name: Commit and push changes
+        env: 
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+          git config --global user.name "colour93"
+          git config --global user.email "colour_93@furry.top"
           git add .
           git commit -m "Auto update data"
           git push origin release
