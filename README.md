@@ -6,7 +6,7 @@
 
 ## 如何使用？
 
-请求 [https://saob.work/api](https://saob.work/api) 即可，还可以跟随一个 query，`type: json | json`，顾名思义
+请求 [https://saob.work/api](https://saob.work/api) 即可，还可以跟随一个 query，`type: json | plain`，顾名思义
 
 ## 如何维护（添加文案）？
 
