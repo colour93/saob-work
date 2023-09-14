@@ -7,7 +7,7 @@ export default async function updateVersion() {
     fs.readFileSync(path.resolve("package.json"), "utf-8")
   );
 
-  rawData.version = moment().format("YYYY-MM-DD HH:mm:ss");
+  rawData.version = moment().zone("+08:00").format("YYYY-MM-DD HH:mm:ss");
 
   fs.writeFileSync(
     path.resolve("package.json"),
