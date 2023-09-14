@@ -24,6 +24,7 @@ export async function GET(request: Request) {
     ? new NextResponse(data)
     : NextResponse.json({
         code: 200,
+        msg: 'success',
         data,
         repo: "https://github.com/colour93/saob-work",
         version: packageJson.version,

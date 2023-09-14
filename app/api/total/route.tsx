@@ -18,6 +18,7 @@ export async function GET() {
 
   return NextResponse.json({
     code: 200,
+    msg: 'success',
     data,
     repo: "https://github.com/colour93/saob-work",
     version: packageJson.version,
