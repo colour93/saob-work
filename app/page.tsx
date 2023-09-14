@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import CardScrollAnimate from "@/components/card-scroll-animate";
 import { Toast, Card, Typography } from "@douyinfe/semi-ui";
-import { ResponseRoot } from "@/types/Response";
+import type { ResponseRoot } from "@/types/Response";
 import { IconGithubLogo } from "@douyinfe/semi-icons";
 
 const fetchCopyWriting = async () => {
@@ -45,20 +45,19 @@ export default function Page() {
 
   const initialPairs = [createCard(cw1), createCard(cw2)];
 
-  const updateData = async () => {
-    if (count == 0) {
-      console.log("init");
-      setCw1((await fetchCopyWriting())!);
-      setCw2((await fetchCopyWriting())!);
-    } else {
-      const cw = (await fetchCopyWriting())!;
-      count % 2 === 0 ? setCw1(cw) : setCw2(cw);
-    }
-  };
-
   useEffect(() => {
+    const updateData = async () => {
+      if (count == 0) {
+        console.log("init");
+        setCw1((await fetchCopyWriting())!);
+        setCw2((await fetchCopyWriting())!);
+      } else {
+        const cw = (await fetchCopyWriting())!;
+        count % 2 === 0 ? setCw1(cw) : setCw2(cw);
+      }
+    };
     updateData();
-  }, [count]);
+  }, [setCw1, setCw2, count]);
 
   const getNext = () => {
     setCount(count + 1);

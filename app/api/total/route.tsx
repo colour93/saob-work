@@ -5,20 +5,24 @@ import packageJson from "@/package.json";
 
 export async function GET() {
   const copywritingStr = await readFile(
-    path.resolve("data", "copywriting.txt"),
+    path.resolve("data", "copywriting.json"),
     "utf-8"
   );
+  let data: string[] = [];
 
-  const copywriting =
-    copywritingStr.split("\r\n\r\n").length === 1
-      ? copywritingStr.split("\n\n")
-      : copywritingStr.split("\r\n\r\n");
-
-  const data = copywriting;
+  try {
+    data = JSON.parse(copywritingStr);
+  } catch (e) {
+    return NextResponse.json({
+      code: 500,
+      data: (e ?? new Error()).toString(),
+      repo: "https://github.com/colour93/saob-work",
+      version: packageJson.version,
+    });
+  }
 
   return NextResponse.json({
     code: 200,
-    msg: 'success',
     data,
     repo: "https://github.com/colour93/saob-work",
     version: packageJson.version,
