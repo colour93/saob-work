@@ -33,7 +33,7 @@ export async function GET(request: Request) {
     ? new NextResponse(res)
     : NextResponse.json({
         code: 200,
-        data,
+        data: res,
         repo: "https://github.com/colour93/saob-work",
         version: packageJson.version,
       });
