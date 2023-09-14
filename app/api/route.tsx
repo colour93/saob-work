@@ -8,9 +8,15 @@ export async function GET(request: Request) {
 
   const type = searchParams.get("type") || "json";
 
-  const copywriting = (
-    await readFile(path.resolve("data", "copywriting.txt"), "utf-8")
-  ).split("\r\n\r\n");
+  const copywritingStr = await readFile(
+    path.resolve("data", "copywriting.txt"),
+    "utf-8"
+  );
+
+  const copywriting =
+    copywritingStr.split("\r\n\r\n").length === 1
+      ? copywritingStr.split("\n\n")
+      : copywritingStr.split("\r\n\r\n");
 
   const data = copywriting[Math.floor(Math.random() * copywriting.length)];
 

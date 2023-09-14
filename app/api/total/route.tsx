@@ -4,9 +4,15 @@ import path from "path";
 import packageJson from "@/package.json";
 
 export async function GET() {
-  const copywriting = (
-    await readFile(path.resolve("data", "copywriting.txt"), "utf-8")
-  ).split("\r\n\r\n");
+  const copywritingStr = await readFile(
+    path.resolve("data", "copywriting.txt"),
+    "utf-8"
+  );
+
+  const copywriting =
+    copywritingStr.split("\r\n\r\n").length === 1
+      ? copywritingStr.split("\n\n")
+      : copywritingStr.split("\r\n\r\n");
 
   const data = copywriting;
 
