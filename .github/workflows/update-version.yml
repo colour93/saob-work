@@ -19,15 +19,12 @@ jobs:
       - name: Run npm run update
         run: npm run update
 
-      - name: Create and switch to new branch
-        run: git checkout -b release
-
       - name: Commit and push changes
-        env: 
+        env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
           git config --global user.name "colour93"
           git config --global user.email "colour_93@furry.top"
           git add .
           git commit -m "Auto update data"
-          git push origin release
+          git push https://$ACCESS_TOKEN@github.com/colour93/saob-work.git HEAD:master
