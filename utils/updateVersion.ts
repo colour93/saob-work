@@ -7,7 +7,7 @@ export default async function updateVersion() {
     await readFile(path.resolve("package.json"), "utf-8")
   );
 
-  rawData.version = moment().zone("+08:00").format("YYYY-MM-DD HH:mm:ss");
+  rawData.version = moment().utcOffset(8).format("YYYY-MM-DD HH:mm:ss");
 
   await writeFile(
     path.resolve("package.json"),
